@@ -17,6 +17,8 @@ For flight data, we filter the original monthly data to the flights between LAX 
 
 `flights1819.csv`: flights data from June 2018 to December 2021
 
+`flight20.csv`: flights data from Jan 2020 to Dec 2020
+
 `flight2021.csv`: flights data from Jan 2021 to Dec 2021
 
 `flights2223.csv`: flights data from January 2022 to May 2023
