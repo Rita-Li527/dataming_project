@@ -13,8 +13,12 @@ https://www.visualcrossing.com/weather-data
 
 
 ## Data Sets
-For flight data, we filter the original monthly data to the flights between LAX and LAS airport and select the first 70 columns. The we combined all the monthly data together to the following datasets:
+For flight data, we filter the original monthly data to the flights between LAX and LAS airport and select the first 70 columns. Then we combined all the monthly data together to the following datasets:
+
 `flights1819.csv`: flights data from June 2018 to December 2021
+
+`flight2021.csv`: flights data from Jan 2021 to Dec 2021
+
 `flights2223.csv`: flights data from January 2022 to May 2023
 
 For weather data
