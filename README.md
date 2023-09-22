@@ -23,4 +23,6 @@ For flight data, we filter the original monthly data to the flights between LAX 
 
 `flights2223.csv`: flights data from January 2022 to May 2023
 
+`DataDictionary.html`: Data dictionary for the dataset
+
 For weather data
