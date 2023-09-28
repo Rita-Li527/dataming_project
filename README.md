@@ -27,4 +27,8 @@ For flight data, we filter the original monthly data to the flights between LAX 
 
 For weather data
 
-`weatherdatadic.html`: Data dictionary for the weather dataset
+`LasVegasWeather.csv`:  Las Vegas weather data from May 2018 to May 2023
+
+`LosAngelesWeather.csv`:  Los Vegas weather data from May 2018 to May 2023
+
+`weatherdatadic.html`: data dictionary for the weather dataset
