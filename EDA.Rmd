@@ -1,0 +1,260 @@
+---
+title: "EDA"
+author: "Rita Li"
+date: "2023-09-28"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: simplex
+    df_print: paged
+    code_fold: show
+    code_download: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, error = FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(ggthemes)
+library(hrbrthemes)
+```
+
+```{r}
+flight_all <- read_csv("flightALL.csv")
+```
+
+
+## Airline Details
+```{r}
+flight_all %>% 
+  count(Operating_Airline) %>% 
+  arrange(n)
+```
+
+#### 1 Allegiant Air (G4)
+Allegiant Air is a low-cost U.S. airline.
+Notable Events:
+·Missing Departure Time (DepTime) data from July 18 to August 01.
+·Operated 1 turn on Wednesdays and 2 turns on Saturdays.
+·Initiated the LAX to LAS route on June 05, 2019.
+·Faced economic challenges, resulting in negative profit in 2020, which almost led to the closure of the route.
+```{r}
+flight_all %>% 
+  group_by(Operating_Airline, DayOfWeek, DepTimeBlk) %>% 
+  summarise(count_flights = n()) %>% 
+  filter(Operating_Airline == "G4") %>% 
+  ggplot(aes(y = DepTimeBlk, x = as.character(DayOfWeek), fill = count_flights))+
+  geom_tile() +
+  scale_fill_distiller(palette = "RdPu", trans = "reverse")+
+  scale_y_discrete(limits=rev)+
+  theme_minimal()
+```
+
+#### 2 Frontier Airlines (F9)
+Frontier Airlines is another low-cost U.S. carrier.
+Notable Events:
+·Operated 1 turn on this route daily.
+·Experienced negative net profit in 2020.
+·The route was possibly closed after July 14, though further investigation is needed to confirm the closure date.
+
+```{r}
+flight_all %>% 
+  group_by(Operating_Airline, DayOfWeek, DepTimeBlk) %>% 
+  summarise(count_flights = n()) %>% 
+  filter(Operating_Airline == "F9") %>% 
+  ggplot(aes(y = DepTimeBlk, x = as.character(DayOfWeek), fill = count_flights))+
+  geom_tile() +
+  scale_fill_distiller(palette = "RdPu", trans = "reverse")+
+  scale_y_discrete(limits=rev)+
+  theme_minimal()
+```
+
+#### 3 Horizon Air (QX)
+Horizon Air began operations on November 05, 2019, and continues to operate.
+It is affiliated with Alaska Airlines.
+
+```{r}
+flight_all %>% 
+  group_by(Operating_Airline, DayOfWeek, DepTimeBlk) %>% 
+  summarise(count_flights = n()) %>% 
+  filter(Operating_Airline == "QX") %>% 
+  ggplot(aes(y = DepTimeBlk, x = as.character(DayOfWeek), fill = count_flights))+
+  geom_tile() +
+  scale_fill_distiller(palette = "RdPu", trans = "reverse")+
+  scale_y_discrete(limits=rev)+
+  theme_minimal()
+```
+
+#### 4 JetBlue (B6)
+JetBlue initiated service on October 07, 2020, and continues to operate on this route.
+```{r}
+flight_all %>% 
+  group_by(Operating_Airline, DayOfWeek, DepTimeBlk) %>% 
+  summarise(count_flights = n()) %>% 
+  filter(Operating_Airline == "B6") %>% 
+  ggplot(aes(y = DepTimeBlk, x = as.character(DayOfWeek), fill = count_flights))+
+  geom_tile() +
+  scale_fill_distiller(palette = "RdPu", trans = "reverse")+
+  scale_y_discrete(limits=rev)+
+  theme_minimal()
+```
+
+#### 5 Compass Airline (CP)
+Compass Airline was associated with Delta.
+The route closed on April 1, 2020.
+Missing DepTime data for March 30, 2020, to March 31, 2020.
+```{r}
+flight_all %>% 
+  group_by(Operating_Airline, DayOfWeek, DepTimeBlk) %>% 
+  summarise(count_flights = n()) %>% 
+  filter(Operating_Airline == "CP") %>% 
+  ggplot(aes(y = DepTimeBlk, x = as.character(DayOfWeek), fill = count_flights))+
+  geom_tile() +
+  scale_fill_distiller(palette = "RdPu",, trans = "reverse")+
+  scale_y_discrete(limits=rev)+
+  theme_minimal()
+```
+
+#### Other Major Airliens
+
+6. Southwest Airlines (WN)
+
+```{r}
+flight_all %>% 
+  group_by(Operating_Airline, DayOfWeek, DepTimeBlk) %>% 
+  summarise(count_flights = n()) %>% 
+  filter(Operating_Airline == "WN") %>% 
+  ggplot(aes(y = DepTimeBlk, x = as.character(DayOfWeek), fill = count_flights))+
+  geom_tile() +
+  scale_fill_distiller(palette = "RdPu",trans = "reverse")+
+  scale_y_discrete(limits=rev)+
+  theme_minimal()
+```
+
+7. American Airlines (AA)
+
+```{r}
+flight_all %>% 
+  group_by(Operating_Airline, DayOfWeek, DepTimeBlk) %>% 
+  summarise(count_flights = n()) %>% 
+  filter(Operating_Airline == "AA") %>% 
+  ggplot(aes(y = DepTimeBlk, x = as.character(DayOfWeek), fill = count_flights))+
+  geom_tile() +
+  scale_fill_distiller(palette = "RdPu", trans = "reverse")+
+  scale_y_discrete(limits=rev)+
+  theme_minimal()
+```
+
+8. United Airlines (UA)
+
+```{r}
+flight_all %>% 
+  group_by(Operating_Airline, DayOfWeek, DepTimeBlk) %>% 
+  summarise(count_flights = n()) %>% 
+  filter(Operating_Airline == "UA") %>% 
+  ggplot(aes(y = DepTimeBlk, x = as.character(DayOfWeek), fill = count_flights))+
+  geom_tile() +
+  scale_fill_distiller(palette = "RdPu", trans = "reverse")+
+  scale_y_discrete(limits=rev)+
+  theme_minimal()
+```
+
+9. Delta Airines (DL)
+```{r}
+flight_all %>% 
+  group_by(Operating_Airline, DayOfWeek, DepTimeBlk) %>% 
+  summarise(count_flights = n()) %>% 
+  filter(Operating_Airline == "DL") %>% 
+  ggplot(aes(y = DepTimeBlk, x = as.character(DayOfWeek), fill = count_flights))+
+  geom_tile() +
+  scale_fill_distiller(palette = "RdPu", trans = "reverse")+
+  scale_y_discrete(limits=rev)+
+  theme_minimal()
+```
+
+10. SkyWest Airlines (OO)
+```{r}
+flight_all %>% 
+  group_by(Operating_Airline, DayOfWeek, DepTimeBlk) %>% 
+  summarise(count_flights = n()) %>% 
+  filter(Operating_Airline == "OO") %>% 
+  ggplot(aes(y = DepTimeBlk, x = as.character(DayOfWeek), fill = count_flights))+
+  geom_tile() +
+  scale_fill_distiller(palette = "RdPu", trans = "reverse")+
+  scale_y_discrete(limits=rev)+
+  theme_minimal()
+```
+
+11. Spirit Airlines (NK)
+
+```{r}
+flight_all %>% 
+  group_by(Operating_Airline, DayOfWeek, DepTimeBlk) %>% 
+  summarise(count_flights = n()) %>% 
+  filter(Operating_Airline == "NK") %>% 
+  ggplot(aes(y = DepTimeBlk, x = as.character(DayOfWeek), fill = count_flights))+
+  geom_tile() +
+  scale_fill_distiller(palette = "RdPu", trans = "reverse")+
+  scale_y_discrete(limits=rev)+
+  theme_minimal()
+```
+
+12. Alaska Airlines (AS)
+
+```{r}
+flight_all %>% 
+  group_by(Operating_Airline, DayOfWeek, DepTimeBlk) %>% 
+  summarise(count_flights = n()) %>% 
+  filter(Operating_Airline == "AS") %>% 
+  ggplot(aes(y = DepTimeBlk, x = as.character(DayOfWeek), fill = count_flights))+
+  geom_tile() +
+  scale_fill_distiller(palette = "RdPu", trans = "reverse")+
+  scale_y_discrete(limits=rev)+
+  theme_minimal()
+```
+
+
+## Plots
+
+```{r, fig.width=7,fig.height=4.5}
+flight_all %>% 
+  group_by(Operating_Airline, DayOfWeek, DepTimeBlk) %>% 
+  summarise(count_flights = n()) %>% 
+  # filter(Operating_Airline == "F9") %>% 
+  ggplot(aes(y = DepTimeBlk, x = as.character(DayOfWeek), fill = count_flights))+
+  geom_tile() +
+  scale_fill_distiller(palette = "RdPu", trans = "reverse")+
+  scale_y_discrete(limits=rev)+
+  theme_minimal()+
+  facet_wrap(vars(Operating_Airline))
+```
+
+```{r, fig.width=9,fig.height=4}
+flight_all %>% 
+  group_by(Year, Month, Operating_Airline) %>% 
+  summarise(num_of_flights = n()) %>%
+  mutate(date = Year + (Month-1)/12) %>% 
+  ggplot(aes(x = date, y = num_of_flights, color = Operating_Airline)) +
+  geom_line(size = 0.7)+
+  labs(title = "Change of Monthly Flights for each Airline",
+       x = "Number of Flights",
+       y = "Date")+
+  theme_light()+
+  theme(legend.position = "none")+
+  facet_wrap(vars(Operating_Airline))
+
+```
+
+```{r, fig.width=7,fig.height=15}
+flight_all %>% 
+  ggplot(aes(x = ArrDelay, y = Operating_Airline))+
+  geom_violin(aes(fill = Operating_Airline, color = Operating_Airline))+
+  theme_light()+
+  labs(title = "Delay of different Airline Company")+
+  facet_grid(vars(Year))
+
+```
